@@ -6,7 +6,11 @@
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 body{
-  background-image: url("/bg.jpg");
+  /* background-image: url("/bg.jpg"); */
+  background: #0f0c29;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,7 +20,7 @@ body{
 .container{
   width: 90vw;
   height: 90vh;
-  background-color: rgba(7, 7, 27, 0.542);
+  background-color: rgba(16, 17, 34, 0.395);
   backdrop-filter: blur(19px) saturate(180%);
   border-radius: 13px;
   border: 1px solid rgba(255, 255, 255, 0.125);
