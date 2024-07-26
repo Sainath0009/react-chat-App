@@ -1,24 +1,38 @@
-.userInfo{
-padding: 20px;
-display: flex;
-align-items: center;
-justify-content: center;
-
-
-
-.user{
-
+.userInfo {
+    padding: 20px;
     display: flex;
     align-items: center;
-    gap: 20px;
+    justify-content: space-between;
 
-}
-img{
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    object-fit: cover;
 
-}
+
+    .user {
+
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+
+        img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+
+        }
+
+    }
+    .ioncs{
+        display: flex;
+        gap: 20px;
+            
+    }
+    img{
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+
+
 
 }
