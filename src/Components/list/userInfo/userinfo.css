@@ -3,6 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    backdrop-filter: blur(25px) saturate(100%);
 
 
 

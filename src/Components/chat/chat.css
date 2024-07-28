@@ -5,14 +5,16 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    
 
 
     .top {
-        padding: 20px;
+        padding: 15px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         border-bottom: 1px solid #dddddd35;
+        backdrop-filter: blur(25px) saturate(100%);
 
         .user {
             display: flex;
@@ -68,10 +70,12 @@
     .center {
         padding: 20px;
         flex: 1;
+        
 
     }
 
     .bottom {
+        backdrop-filter: blur(25px) saturate(100%);
 
         padding: 20px;
         display: flex;
