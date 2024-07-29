@@ -1,7 +1,7 @@
 .chatlist {
     flex: 1;
     overflow-y: scroll;
-    scrollbar-color:   #dddddd35 rgba(17, 25, 40, 0.5);
+    scrollbar-color:   #f5f0f035 rgba(17, 25, 40, 0.5)  ;
     
     backdrop-filter: blur(10px) saturate(180%);
 
