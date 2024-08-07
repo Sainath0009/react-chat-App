@@ -5,23 +5,25 @@
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); 
 body{
-  background: url("https://4kwallpapers.com/images/wallpapers/macos-big-sur-apple-layers-fluidic-colorful-dark-wwdc-2020-3840x2160-1432.jpg");
-  background-size: cover;
-  background-attachment: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-
-}
+  min-height: 100vh;
+  background: url('https://i.postimg.cc/HW2MmR3p/ken-cheung-Kon-WFWUa-Auk-unsplash.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+} 
 .container{
-  width: 80vw;
+  width: 90vw;
   height: 90vh;
-  background-color: rgba(16, 17, 34, 0.395);
+  /* background-color: rgba(157, 161, 249, 0.537); */
   backdrop-filter: blur(19px) saturate(180%);
   border-radius: 13px;
   border: 1px solid rgba(255, 255, 255, 0.125);
   display: flex;
+  
+
 }
 

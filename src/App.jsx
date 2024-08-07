@@ -11,24 +11,27 @@ import Notifiaction from "./Components/notifiaction/Notifiaction2";
 function App() {
 
 
-  const user = false;
+  const user = true;
   return (
-    <div className='container'>
+    <div>
       {user ? (
-        <>
+      
+        <div  className='container'>
           <List />
           <Chat />
           <Detail />
-        </>
+        
+
+        </div>
 
 
 
       ) : (
-      
-      <Login />
-      
+
+        <Login />
+
       )}
-<Notifiaction/>
+      <Notifiaction />
 
 
     </div>
