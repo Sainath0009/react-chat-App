@@ -10,8 +10,8 @@ import { getStorage } from "firebase/storage";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-//   apiKey: "AIzaSyB_J5eXEN23LyFasAmPfNDDguyZ9pK4Md8",
-    apiKey: import.meta.env.VITE_API_KEY,
+  apiKey: "AIzaSyB_J5eXEN23LyFasAmPfNDDguyZ9pK4Md8",
+    // apiKey: import.meta.env.VITE_API_KEY,
   authDomain: "reactchat-de5d3.firebaseapp.com",
   projectId: "reactchat-de5d3",
   storageBucket: "reactchat-de5d3.appspot.com",
@@ -22,8 +22,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
 
-export const auth=getAuth()
-export const db=getFirestore()
-export const storage=getStorage()
+
+export const auth=getAuth();
+export const db=getFirestore();
+export const storage=getStorage();

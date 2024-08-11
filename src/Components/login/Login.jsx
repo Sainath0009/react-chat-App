@@ -1,6 +1,9 @@
 import { useState } from "react";
 import "./login.css";
 import { toast } from "react-toastify";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
+
 
 const Login = () => {
     const [avatar, setAvatar] = useState({
@@ -19,16 +22,32 @@ const Login = () => {
         }
     };
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const { email, username, password } = Object.fromEntries(formData);
-        console.log(username);
+        const { email, username, password } = Object.fromEntries(formData.entries());
+
+        try {
+            const res = await createUserWithEmailAndPassword(auth, email, password);
+            toast.success("Registration successful!");
+        } catch (err) {
+            console.log(err);
+            toast.error(err.message);
+        }
     };
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        toast.success("Hello");
+        const formData = new FormData(e.target);
+        const { email, password } = Object.fromEntries(formData.entries());
+
+        try {
+            const res = await signInWithEmailAndPassword(auth, email, password);
+            toast.success("Login successful!");
+        } catch (err) {
+            console.log(err);
+            toast.error(err.message);
+        }
     };
 
     return (
@@ -58,10 +77,8 @@ const Login = () => {
                         <box-icon name="lock-alt" type="solid" color="white"></box-icon>
                     </div>
                     <button type="submit" className="btn">Sign Up</button>
-                    <p className="register-link">I have an account?<br /> <a href="#" onClick={() => setIsRegister(false)}>Login</a></p>
-                    
+                    <p className="register-link">I have an account?<br /> <a  onClick={() => setIsRegister(false)}>Login</a></p>
                 </form>
-                
             ) : (
                 <form onSubmit={handleLogin}>
                     <h1>Welcome Back</h1>
@@ -78,12 +95,9 @@ const Login = () => {
                         <a href="#">Forgot password?</a>
                     </div>
                     <button type="submit" className="btn">Sign in</button>
-                    <p className="register-link">Don't have an account?<br /> <a href="#" onClick={() => setIsRegister(true)}>Register</a></p>
+                    <p className="register-link">Don't have an account?<br /> <a  onClick={() => setIsRegister(true)}>Register</a></p>
                 </form>
             )}
-            {/* <div className="register-link">
-                <p>Don't have an account?<br /> <a href="#" onClick={() => setIsRegister(true)}>Register</a></p>
-            </div> */}
         </div>
     );
 };
