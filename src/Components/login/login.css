@@ -97,6 +97,10 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: 600;
+
+    &:disabled{
+        cursor: not-allowed;
+    }
 }
 
 .register-link {
@@ -121,11 +125,14 @@
 }
 
 label img {
-    width: 50px;
-    height: 50px;
+    margin-left: 90px;
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 150px;
     border-radius: 10px;
     object-fit: cover;
     opacity: 0.6;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 20px;;
 }
