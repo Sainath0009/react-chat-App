@@ -14,29 +14,36 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background: url('https://i.postimg.cc/HW2MmR3p/ken-cheung-Kon-WFWUa-Auk-unsplash.jpg') no-repeat;
+  min-height: 100%;
   background-size: cover;
   background-position: center;
+  background-color: lightyellow;
   font-family: 'Poppins', sans-serif;
 } 
 .container{
-  width: 90vw;
-  height: 90vh;
-  /* background-color: rgba(157, 161, 249, 0.537); */
-  backdrop-filter: blur(19px) saturate(180%);
+  width: 85vw;
+  height: 95vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+ background-color: #00000088;
   border-radius: 13px;
   border: 1px solid rgba(255, 255, 255, 0.125);
   display: flex;
-  
+  overflow: hidden;
 
 }
 .Loading {
   width: 50px;
   aspect-ratio: 1;
   border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   border: 8px solid lightblue;
-  border-right-color: orange;
+  border-right-color: rgb(0, 145, 255);
   animation: s2 1s infinite linear;
 }
 @keyframes s2 {to{transform: rotate(1turn)}}
