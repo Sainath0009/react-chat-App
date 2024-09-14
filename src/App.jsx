@@ -2,19 +2,23 @@ import Chat from "./Components/chat/Chat";
 import List from "./Components/list/List";
 import Detail from "./Components/detail/Detail";
 import Login from "./Components/login/Login";
-import Notifiaction from "./Components/notifiaction/Notifiaction2";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useUserStore } from "./lib/userStore";
 import { auth } from "./lib/firebase";
+import Notifiaction from "./Components/notifiaction/Notifiaction";
 
-function App() {
+
+function App() { 
+
   const { currentUser, isLoading, fetchUserInfo } = useUserStore();
 
   useEffect(() => {
     const unSub = onAuthStateChanged(auth, (user) => {
-      if(user) {
+      if (user) {
         fetchUserInfo(user.uid);
+      } else {
+        fetchUserInfo(null); 
       }
     });
 
@@ -23,12 +27,13 @@ function App() {
     };
   }, [fetchUserInfo]);
 
-  
+  console.log(currentUser); 
 
-  if (isLoading) return <div className="Loading"></div>
+  if (isLoading) return <div className="Loading">Loading...</div>;
+
   return (
     <div>
-      { currentUser ? (
+      {currentUser ? ( 
         <div className="container">
           <List />
           <Chat />
@@ -37,7 +42,7 @@ function App() {
       ) : (
         <Login />
       )}
-      <Notification /> 
+      <Notifiaction/>
     </div>
   );
 }

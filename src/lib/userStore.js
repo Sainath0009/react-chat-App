@@ -7,7 +7,8 @@ export const useUserStore = create((set) => ({
   isLoading: true,
 
   fetchUserInfo: async (uid) => {
-    console.log("fetchUserInfo called with uid:", uid); 
+    console.log("fetchUserInfo called with uid:", uid);
+    
     if (!uid) {
       console.log("No UID provided. Setting currentUser to null and isLoading to false.");
       return set({ currentUser: null, isLoading: false });
@@ -16,7 +17,7 @@ export const useUserStore = create((set) => ({
     try {
       const docRef = doc(db, "users", uid);
       const docSnap = await getDoc(docRef);
-      console.log("Document snapshot:", docSnap.exists()); 
+      console.log("Document snapshot exists:", docSnap.exists());
 
       if (docSnap.exists()) {
         console.log("User data found:", docSnap.data());
