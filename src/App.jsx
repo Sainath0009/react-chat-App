@@ -36,8 +36,7 @@ function App() {
           <Chat />
           <Detail />
         </div>
-      ) : (
-        <Login />
+      ) : (<Login />
       )}
       <Notifiaction/>
     </div>

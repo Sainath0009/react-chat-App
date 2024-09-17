@@ -1,10 +1,13 @@
 import "./addUser.css";
 import { db } from "../../../../lib/firebase";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { arrayUnion, collection, doc,getDocs, query, serverTimestamp, setDoc,updateDoc, where, } from "firebase/firestore";
 import { useState } from "react";
+import {useUserStore} from "../../../../lib/userStore";
+
 
 const AddUser = () => {
   const [user, setUser] = useState(null);
+  const[currentUser]=useUserStore();
 
   // Make the function async
   const handleSearch = async (e) => {
@@ -29,7 +32,43 @@ const AddUser = () => {
       console.log("Error fetching user:", err);
     }
   };
+const handleAdd= async()=>{
 
+  const chatRef= collection(db,"chats")
+  const userChatsRef= collection(db,"userchats")
+try {
+
+  const newChatRef = doc(collection(db, "chats"));
+
+    await setDoc(chatRef,{
+    createdAt:serverTimestamp,
+    messages:[],      
+  });
+
+
+  await updateDoc(doc(userChatsRef, user.id),{
+    chats:arrayUnion({
+      chatId:newChatRef.id,
+      lastMessage:"",
+      reciverId:currentUser.id,
+      updatedAt:Date.now(),
+    })
+  });
+  await updateDoc(doc(userChatsRef, currentUser.id),{
+    chats:arrayUnion({
+      chatId:newChatRef.id,
+      lastMessage:"",
+      reciverId:user.id,
+      updatedAt:Date.now(),
+    })
+  });
+  
+} catch (err) {
+  console.log("Error adding user:", err);
+  
+}
+
+}
   return (
     <div className="adduser">
       <form onSubmit={handleSearch}>
@@ -43,7 +82,7 @@ const AddUser = () => {
             <img src={user.avatar || "./avatar.png"} alt="User Avatar" />
             <span>{user.username}</span>
           </div>
-          <button>Add user</button>
+          <button onClick={handleAdd}>Add user</button>
         </div>
       )}
     </div>
