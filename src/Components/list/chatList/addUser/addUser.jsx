@@ -1,88 +1,92 @@
 import "./addUser.css";
 import { db } from "../../../../lib/firebase";
-import { arrayUnion, collection, doc,getDocs, query, serverTimestamp, setDoc,updateDoc, where, } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { useState } from "react";
-import {useUserStore} from "../../../../lib/userStore";
-
+import { useUserStore } from "../../../../lib/userStore";
 
 const AddUser = () => {
   const [user, setUser] = useState(null);
-  const[currentUser]=useUserStore();
 
-  // Make the function async
+  const { currentUser } = useUserStore();
+
   const handleSearch = async (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
     const username = formData.get("username");
 
     try {
       const userRef = collection(db, "users");
+
       const q = query(userRef, where("username", "==", username));
 
-      const querySnapshot = await getDocs(q);
+      const querySnapShot = await getDocs(q);
 
-      if (!querySnapshot.empty) {
-        setUser(querySnapshot.docs[0].data());
-      } else {
-        console.log("No such user found");
-        setUser(null);
+      if (!querySnapShot.empty) {
+        setUser(querySnapShot.docs[0].data());
       }
     } catch (err) {
-      console.log("Error fetching user:", err);
+      console.log(err);
     }
   };
-const handleAdd= async()=>{
 
-  const chatRef= collection(db,"chats")
-  const userChatsRef= collection(db,"userchats")
-try {
+  const handleAdd = async () => {
+    const chatRef = collection(db, "chats");
+    const userChatsRef = collection(db, "userchats");
 
-  const newChatRef = doc(collection(db, "chats"));
+    try {
+      const newChatRef = doc(chatRef);
 
-    await setDoc(chatRef,{
-    createdAt:serverTimestamp,
-    messages:[],      
-  });
+      await setDoc(newChatRef, {
+        createdAt: serverTimestamp(),
+        messages: [],
+      });
 
+      await updateDoc(doc(userChatsRef, user.id), {
+        chats: arrayUnion({
+          chatId: newChatRef.id,
+          lastMessage: "",
+          receiverId: currentUser.id,
+          updatedAt: Date.now(),
+        }),
+      });
 
-  await updateDoc(doc(userChatsRef, user.id),{
-    chats:arrayUnion({
-      chatId:newChatRef.id,
-      lastMessage:"",
-      reciverId:currentUser.id,
-      updatedAt:Date.now(),
-    })
-  });
-  await updateDoc(doc(userChatsRef, currentUser.id),{
-    chats:arrayUnion({
-      chatId:newChatRef.id,
-      lastMessage:"",
-      reciverId:user.id,
-      updatedAt:Date.now(),
-    })
-  });
-  
-} catch (err) {
-  console.log("Error adding user:", err);
-  
-}
+      await updateDoc(doc(userChatsRef, currentUser.id), {
+        chats: arrayUnion({
+          chatId: newChatRef.id,
+          lastMessage: "",
+          receiverId: user.id,
+          updatedAt: Date.now(),
+        }),
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-}
   return (
-    <div className="adduser">
+    <div className="addUser">
       <form onSubmit={handleSearch}>
         <input type="text" placeholder="Username" name="username" />
-        <button type="submit">Search</button>
+        <button>Search</button>
       </form>
-
       {user && (
         <div className="user">
           <div className="detail">
-            <img src={user.avatar || "./avatar.png"} alt="User Avatar" />
+            <img src={user.avatar || "./avatar.png"} alt="" />
             <span>{user.username}</span>
           </div>
-          <button onClick={handleAdd}>Add user</button>
+          <button onClick={handleAdd}>Add User</button>
         </div>
       )}
     </div>
