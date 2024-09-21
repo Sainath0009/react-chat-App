@@ -1,7 +1,4 @@
 
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); 
-
 * {
   margin: 0;
   padding: 0;
@@ -10,41 +7,28 @@
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
-body{
+body {
+  background-image: url("/bg.jpg");
   display: flex;
-  justify-content: center;
   align-items: center;
-  min-height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-color: lightyellow;
-  font-family: 'Poppins', sans-serif;
-} 
-.container{
-  width: 85vw;
-  height: 95vh;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
- background-color: #00000088;
-  border-radius: 13px;
+  justify-content: center;
+  height: 100vh;
+  color: white;
+}
+
+.container {
+  width: 80vw;
+  height: 90vh;
+  background-color: rgba(17, 25, 40, 0.75);
+  backdrop-filter: blur(19px) saturate(180%);
+  border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.125);
   display: flex;
-  overflow: hidden;
-
 }
-.Loading {
-  width: 50px;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 8px solid lightblue;
-  border-right-color: rgb(0, 145, 255);
-  animation: s2 1s infinite linear;
-}
-@keyframes s2 {to{transform: rotate(1turn)}}
 
+.loading{
+  padding: 50px;
+  font-size: 36px;
+  border-radius: 10px;
+  background-color: rgba(17, 25, 40, 0.9);
+}
