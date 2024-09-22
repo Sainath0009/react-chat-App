@@ -43,37 +43,70 @@ const AddUser = () => {
   const handleAdd = async () => {
     const chatRef = collection(db, "chats");
     const userChatsRef = collection(db, "userchats");
-
+  
     try {
-      const newChatRef = doc(chatRef);
-
+      const newChatRef = doc(collection(db, "chats"));
+  
+      // Create a new chat document with server timestamp and empty messages
       await setDoc(newChatRef, {
         createdAt: serverTimestamp(),
         messages: [],
       });
-
-      await updateDoc(doc(userChatsRef, user.id), {
-        chats: arrayUnion({
-          chatId: newChatRef.id,
-          lastMessage: "",
-          receiverId: currentUser.id,
-          updatedAt: Date.now(),
-        }),
-      });
-
-      await updateDoc(doc(userChatsRef, currentUser.id), {
-        chats: arrayUnion({
-          chatId: newChatRef.id,
-          lastMessage: "",
-          receiverId: user.id,
-          updatedAt: Date.now(),
-        }),
-      });
+  
+      // Check if the user chat document exists, if not create it
+      const userChatDocRef = doc(db, "userchats", user.id);
+      const currentUserChatDocRef = doc(db, "userchats", currentUser.id);
+  
+      const userChatSnap = await getDoc(userChatDocRef);
+      const currentUserChatSnap = await getDoc(currentUserChatDocRef);
+  
+      // If the user's chat document doesn't exist, create it
+      if (!userChatSnap.exists()) {
+        await setDoc(userChatDocRef, {
+          chats: arrayUnion({
+            chatId: newChatRef.id,
+            lastMessage: "",
+            receiverId: currentUser.id,
+            updatedAt: Date.now(),
+          }),
+        });
+      } else {
+        await updateDoc(userChatDocRef, {
+          chats: arrayUnion({
+            chatId: newChatRef.id,
+            lastMessage: "",
+            receiverId: currentUser.id,
+            updatedAt: Date.now(),
+          }),
+        });
+      }
+  
+      // If the current user's chat document doesn't exist, create it
+      if (!currentUserChatSnap.exists()) {
+        await setDoc(currentUserChatDocRef, {
+          chats: arrayUnion({
+            chatId: newChatRef.id,
+            lastMessage: "",
+            receiverId: user.id,
+            updatedAt: Date.now(),
+          }),
+        });
+      } else {
+        await updateDoc(currentUserChatDocRef, {
+          chats: arrayUnion({
+            chatId: newChatRef.id,
+            lastMessage: "",
+            receiverId: user.id,
+            updatedAt: Date.now(),
+          }),
+        });
+      }
+  
+      console.log("Chat created with ID: ", newChatRef.id);
     } catch (err) {
-      console.log(err);
+      console.log("Error adding user:", err);
     }
   };
-
   return (
     <div className="addUser">
       <form onSubmit={handleSearch}>
