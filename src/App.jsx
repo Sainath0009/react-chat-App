@@ -30,7 +30,7 @@ const App = () => {
       {currentUser ? (
         <>
           <List />
-          {chatId && <Chat />}
+          {chatId && <Chat/>}
           {chatId && <Detail />}
         </>
       ) : (

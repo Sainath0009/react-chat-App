@@ -7,10 +7,7 @@ const List = () => {
     <div className='list'>
       <Userinfo/>
       <ChatList/>
-
     </div>
-      
-    
   )
 }
 
