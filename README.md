@@ -1,4 +1,5 @@
-🚀 Chat Application
+🚀<<h1> Chat Application</h1>
+
 A real-time chat application built with React and Firebase, providing seamless communication between users. Features include user authentication, avatar upload, and real-time messaging for a smooth chat experience.
 
 🔑 Features
