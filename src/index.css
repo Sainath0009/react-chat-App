@@ -7,7 +7,7 @@
 }
 
 body {
-  background-image: url("/bg.jpg");
+background:lightyellow;
   display: flex;
   align-items: center;
   justify-content: center;
