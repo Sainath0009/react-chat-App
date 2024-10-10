@@ -66,3 +66,4 @@ A real-time <strong>chat application</strong> built with <strong>React</strong> 
   </li>
   <li>Open a pull request.</li>
 </ol>
+
